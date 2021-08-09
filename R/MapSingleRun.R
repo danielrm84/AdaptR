@@ -109,7 +109,7 @@ map.single.run <-
   final.occurrence.ras <- raster(final.occurrence.fname)
   plot(final.occurrence.ras,main="Occupancy",col=c("grey","black"), legend=F)
 
-  if(ength(Z.files) > 0)
+  if(length(Z.files) > 0)
     {
     for(i.env in 1:length(Z.files))
       {
