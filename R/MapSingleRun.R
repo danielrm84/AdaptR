@@ -107,6 +107,8 @@ map.single.run <-
   ##_____________________________________________________________________________________##
   
   # prepare plot area
+  # raster objects are passed to the plot function for raster objects using
+  # the corresponding scope (i.e., raster::)
   if(length(Z.files) > 0)
   {
     par(mfrow = c(nrows = 2*length(Z.files) # times two, one z. and vp.file at a time
@@ -115,8 +117,8 @@ map.single.run <-
         )
   }
   
-  final.occurrence.ras <- raster(final.occurrence.fname)
-  plot(final.occurrence.ras,main="Occupancy",col=c("grey","black"), legend=F)
+  final.occurrence.ras <- raster::raster(final.occurrence.fname)
+  raster::plot(final.occurrence.ras,main="Occupancy",col=c("grey","black"), legend=F)
   plot.new() # empty plot at (1,2)
   
   # environmental variables are plotted below
@@ -126,13 +128,13 @@ map.single.run <-
       {
       env.z.fname <- Z.files[i.env]
       env.vp.fname <- Vp.files[i.env]
-      env.z.ras <- raster(env.z.fname)
-      env.vp.ras <- raster(env.vp.fname)
+      env.z.ras <- raster::raster(env.z.fname)
+      env.vp.ras <- raster::raster(env.vp.fname)
       env.ID <- substr(Z.files[i.env], nchar(Z.files[i.env])-13+1, nchar(Z.files[i.env])-12)
-      plot(final.occurrence.ras, main=paste0("Mean tolerance for environment ",env.ID), col=c("grey","black"),legend=F)
-      plot(env.z.ras, add = T) # using defaults. No palette named colours --> col=colours,add=T)
-      plot(final.occurrence.ras, main=paste0("Variance in tolerance for environment ",env.ID), col=c("grey","black"),legend=F)
-      plot(env.vp.ras, add = T) # using defaults. No palette named colours --> col=colours,add=T)
+      raster::plot(final.occurrence.ras, main=paste0("Mean tolerance for environment ",env.ID), col=c("grey","black"),legend=F)
+      raster::plot(env.z.ras, add = T) # using defaults. No palette named colours --> col=colours,add=T)
+      raster::plot(final.occurrence.ras, main=paste0("Variance in tolerance for environment ",env.ID), col=c("grey","black"),legend=F)
+      raster::plot(env.vp.ras, add = T) # using defaults. No palette named colours --> col=colours,add=T)
       } # end for i.env
     } # end if n.env.vars.adapt > 0
   
